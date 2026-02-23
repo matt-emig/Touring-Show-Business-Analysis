@@ -1,6 +1,6 @@
 # Touring-Show-Business-Analysis
 
-##Project Overview
+## Project Overview
 
 This project analyzes the operational and financial performance of a fictional touring theatre production company. The objective is to simulate a real-world business intelligence workflow:
 
