@@ -1,5 +1,6 @@
 # Touring-Show-Business-Analysis
-1. Project Overview
+
+##Project Overview
 
 This project analyzes the operational and financial performance of a fictional touring theatre production company. The objective is to simulate a real-world business intelligence workflow:
 
@@ -13,7 +14,7 @@ Design executive-level dashboards focused on revenue, attendance, cost, and prof
 
 The project mirrors a real analytics role in an entertainment or live-events company.
 
-2. Business Context
+## Business Context
 
 A touring production company performs shows across multiple cities and venues. Leadership wants data-driven answers to:
 
@@ -41,7 +42,7 @@ Average ticket prices
 
 Operational costs
 
-3. Tech Stack
+## Tech Stack
 
 SQL (data cleaning, transformation, aggregation)
 
@@ -49,7 +50,7 @@ Tableau (dashboard creation & visualization)
 
 Relational database (PostgreSQL / MySQL compatible)
 
-4. Data Model
+## Data Model
 Core Tables
 
 performances
@@ -94,7 +95,7 @@ staff_cost
 
 marketing_cost
 
-5. SQL Workflow
+## SQL Workflow
 Step 1 – Data Cleaning
 
 Remove duplicate performance entries
@@ -172,14 +173,14 @@ Revenue vs Cost comparison
 
 Margin by venue
 
-7. Key Metrics
+## Key Metrics
 Metric	Definition
 Revenue	tickets_sold × avg_ticket_price
 Total Cost	venue + staff + marketing
 Profit	revenue − total_cost
 Fill Rate	tickets_sold / capacity
 Margin	profit / revenue
-8. Insights Generated (Example Findings)
+## Insights Generated (Example Findings)
 
 Major metropolitan cities drive 60%+ of total revenue.
 
@@ -189,7 +190,7 @@ Certain venues reach 95%+ average capacity utilization.
 
 Marketing-heavy cities do not always translate to higher profit.
 
-9. What This Project Demonstrates
+## What This Project Demonstrates
 
 Practical SQL aggregation skills (GROUP BY, HAVING, JOINs)
 
@@ -201,7 +202,7 @@ Storytelling with data
 
 Ability to simulate a real analytics workflow
 
-10. Future Improvements
+## Future Improvements
 
 Add forecasting model for ticket sales
 
@@ -213,7 +214,7 @@ Add geographic visualization in Tableau
 
 Automate ETL pipeline
 
-11. How to Run
+## How to Run
 
 Import dataset into SQL database
 
