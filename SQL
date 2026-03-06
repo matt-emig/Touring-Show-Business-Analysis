@@ -1,0 +1,306 @@
+#SQL
+
+## Updating Tables
+
+INSERT INTO shows (show_id, show_name, genre, tour_start_date, tour_end_date) VALUES
+(1, 'Midnight Echo', 'Contemporary Dance', '2025-03-01', '2025-03-31'),
+(2, 'Velvet Shadows', 'Drama', '2025-04-01', '2025-04-30'),
+(3, 'Electric Pulse', 'Musical', '2025-05-01', '2025-05-31'),
+(4, 'Silent Horizon', 'Experimental Theatre', '2025-06-01', '2025-06-30'),
+(5, 'Golden Age', 'Classical Revival', '2025-07-01', '2025-07-31');
+
+INSERT INTO performances 
+(performance_id, show_id, venue_id, performance_date, tickets_sold, ticket_price_avg) VALUES
+-- Midnight Echo (March)
+(1,1,101,'2025-03-01',1650,78.50),
+(2,1,101,'2025-03-02',1720,80.00),
+(3,1,102,'2025-03-05',2300,82.00),
+(4,1,102,'2025-03-06',2400,83.50),
+(5,1,103,'2025-03-08',1900,88.00),
+(6,1,103,'2025-03-09',1850,87.50),
+(7,1,104,'2025-03-12',3500,95.00),
+(8,1,104,'2025-03-13',3600,96.00),
+(9,1,105,'2025-03-15',2100,85.00),
+(10,1,105,'2025-03-16',2050,84.50),
+(11,1,106,'2025-03-20',1800,75.00),
+(12,1,106,'2025-03-21',-50,75.00), 
+(13,1,107,'2025-03-25',1950,90.00),
+(14,1,107,'2025-03-26',2000,0.00), 
+(15,1,108,'2025-04-02',2100,88.00), 
+
+-- Velvet Shadows (April)
+(16,2,101,'2025-04-02',1500,72.00),
+(17,2,101,'2025-04-03',1600,73.50),
+(18,2,102,'2025-04-06',2200,75.00),
+(19,2,102,'2025-04-07',2250,76.00),
+(20,2,103,'2025-04-10',2000,85.00),
+(21,2,103,'2025-04-11',NULL,84.50), 
+(22,2,104,'2025-04-15',3800,95.00),
+(23,2,104,'2025-04-16',3900,97.00),
+(24,2,105,'2025-04-18',2100,85.00),
+(25,2,105,'2025-04-19',2100,85.00), 
+(26,2,106,'2025-04-22',1750,70.00),
+(27,2,106,'2025-04-23',1800,71.00),
+(28,2,107,'2025-04-26',1900,88.00),
+(29,2,107,'2025-04-27',1950,89.00),
+(30,2,108,'2025-05-02',2000,92.00), 
+
+-- Electric Pulse (May)
+(31,3,101,'2025-05-01',2400,92.00),
+(32,3,101,'2025-05-02',2500,94.00),
+(33,3,102,'2025-05-05',2450,92.00),
+(34,3,102,'2025-05-06',2500,94.00),
+(35,3,103,'2025-05-09',1950,89.00),
+(36,3,103,'2025-05-10',2000,90.00),
+(37,3,104,'2025-05-12',4000,110.00),
+(38,3,104,'2025-05-13',4100,112.00),
+(39,3,105,'2025-05-15',2150,93.00),
+(40,3,105,'2025-05-16',2200,95.00),
+(41,3,106,'2025-05-18',1800,87.00),
+(42,3,106,'2025-05-19',1850,88.00),
+(43,3,107,'2025-05-22',2050,91.00),
+(44,3,107,'2025-05-23',2100,92.00),
+(45,3,108,'2025-05-25',NULL,100.00), 
+(46,3,108,'2025-05-26',2300,NULL), 
+
+-- Silent Horizon (June)
+(47,4,101,'2025-06-01',1200,65.00),
+(48,4,101,'2025-06-02',1250,66.00),
+(49,4,102,'2025-06-05',1400,68.00),
+(50,4,102,'2025-06-06',1450,69.00),
+(51,4,103,'2025-06-09',1300,70.00),
+(52,4,103,'2025-06-10',1350,72.00),
+(53,4,104,'2025-06-12',3000,90.00),
+(54,4,104,'2025-06-13',3050,91.00),
+(55,4,105,'2025-06-15',1600,75.00),
+(56,4,105,'2025-06-16',-10,75.00), 
+(57,4,106,'2025-06-18',1500,73.00),
+(58,4,106,'2025-06-19',1550,74.00),
+(59,4,107,'2025-06-22',1700,76.00),
+(60,4,107,'2025-06-23',1750,77.00),
+
+-- Golden Age (July)
+(61,5,101,'2025-07-01',2000,88.00),
+(62,5,101,'2025-07-02',2050,89.00),
+(63,5,102,'2025-07-05',2200,92.00),
+(64,5,102,'2025-07-06',2250,93.00),
+(65,5,103,'2025-07-09',2100,90.00),
+(66,5,103,'2025-07-10',2150,91.00),
+(67,5,104,'2025-07-12',4200,115.00),
+(68,5,104,'2025-07-13',4300,118.00),
+(69,5,105,'2025-07-15',2500,95.00),
+(70,5,105,'2025-07-16',2550,96.00),
+(71,5,106,'2025-07-18',2300,94.00),
+(72,5,106,'2025-07-19',2350,95.00),
+(73,5,107,'2025-07-22',2600,98.00),
+(74,5,107,'2025-07-23',2650,99.00),
+(75,5,108,'2025-07-25',2800,102.00),
+(76,5,108,'2025-07-26',2850,103.00);
+
+ALTER TABLE performances
+ADD COLUMN tour_id INT
+AFTER performance_id;
+
+UPDATE performances p
+JOIN (
+    SELECT *
+    FROM (
+        SELECT 
+            performance_id,
+            DENSE_RANK() OVER (ORDER BY show_id, venue_id) AS tour_id
+        FROM performances
+    ) ranked
+) t
+ON p.performance_id = t.performance_id
+SET p.tour_id = t.tour_id;
+
+ALTER TABLE shows
+ADD COLUMN tour_id INT;
+
+INSERT INTO costs 
+(tour_id, travel_cost, crew_cost, marketing_cost, venue_rental) VALUES
+(1,1450,5020,2150,10850),
+(2,2100,6120,2680,12600),
+(3,1200,4680,1980,9800),
+(4,2800,8890,4010,19300),
+(5,1650,5300,2310,11120),
+(6,980,4200,1620,9050),
+(7,1750,5600,2440,11820),
+(8,1950,5890,2520,12150),
+(9,1500,5150,2210,10700),
+(10,2300,6300,2750,12900),
+(11,1350,4900,2100,10150),
+(12,3100,9050,4200,18750),
+(13,1600,5220,2380,11300),
+(14,1100,4380,1750,8920),
+(15,1850,5750,2490,12040),
+(16,2050,6000,2600,12400),
+(17,1700,5200,2260,10920),
+(18,2400,6400,2900,13100),
+(19,1250,4750,2050,9900),
+(20,2950,8700,3920,18500),
+(21,1550,5400,2470,11450),
+(22,900,4100,1580,8600),
+(23,1900,5900,2550,12100),
+(24,2150,6180,2700,12750),
+(25,1400,4980,2180,10600),
+(26,2250,6250,2820,13020),
+(27,1500,5050,2230,10400),
+(28,3200,9200,4300,19800),
+(29,1750,5480,2520,11600),
+(30,1000,4320,1700,8800),
+(31,2000,6000,2680,12350),
+(32,1600,5100,2300,11050),
+(33,2500,6500,2950,13400),
+(34,1400,4820,2140,10080),
+(35,3050,8950,4100,19050),
+(36,1500,5250,2350,11200),
+(37,1150,4450,1820,9100),
+(38,1850,5850,2600,11900),
+(39,2200,6050,2720,12500);
+
+CREATE TABLE venues (
+    venue_id INT PRIMARY KEY,
+    venue_name VARCHAR(100),
+    capacity INT
+);
+
+INSERT INTO venues (venue_id, venue_name, capacity) VALUES
+(101,'Aurora Grande Theatre',2600),
+(102,'Golden Palace',3000),
+(103,'Montclair Playhouse',2500),
+(104,'Imperial Opera Hall',4500),
+(105,'Starlight Performance Arts Center',2700),
+(106,'Lindenhof Theater',2200),
+(107,'Velvet Crown Auditorium',2800),
+(108,'Horizon Stage Pavilion',3000);
+
+## Cleaning missing or erroneous values, and creating View to access cleaned data
+
+select * from performances;
+select * from costs;
+select * from shows;
+
+SELECT 
+	p.performance_id,
+	CASE
+		WHEN p.performance_date BETWEEN s.tour_start_date AND s.tour_end_date THEN p.performance_date
+        ELSE NULL
+	END AS performance_date_clean
+FROM 
+	performances p
+JOIN
+	shows s ON s.show_id = p.show_id;
+
+UPDATE  performances
+SET performance_date = '2025-03-29'
+WHERE performance_id = 15;
+
+UPDATE performances
+SET performance_date = '2025-04-29'
+WHERE performance_id = 30;
+
+CREATE OR REPLACE VIEW performances_clean AS
+SELECT 
+	performance_id,
+    tour_id,
+    show_id,
+    venue_id,
+    performance_date,
+    CASE
+		WHEN tickets_sold > 0 THEN tickets_sold
+        ELSE 0
+	END AS tickets_sold_clean,
+    CASE
+		WHEN ticket_price_avg IS NOT NULL THEN ticket_price_avg
+        ELSE 0
+	END AS ticket_price_avg_clean
+FROM
+	performances;
+
+SELECT * FROM performances_clean;
+
+## Creating views for EDA of aggregations
+
+CREATE OR REPLACE VIEW aggregations AS
+SELECT 
+	p.performance_id,
+    p.performance_date_clean,
+    p.show_id,
+    p.venue_id,
+	p.tickets_sold_clean * p. ticket_price_avg_clean AS revenue,
+    c.travel_cost_clean + c.crew_cost_clean + c.marketing_cost_clean + c.venue_rental_clean AS total_cost,
+    (p.tickets_sold_clean * p. ticket_price_avg_clean) - (c.travel_cost_clean + c.crew_cost_clean + c.marketing_cost_clean + c.venue_rental_clean) AS profit,
+    CASE
+		WHEN p.performance_date_clean IS NULL THEN 'Performance date'
+		WHEN p.tickets_sold_clean IS NULL THEN 'Tickets sold'
+        WHEN p.ticket_price_avg_clean IS NULL THEN 'Ticket price average'
+        WHEN c.travel_cost_clean IS NULL THEN 'Travel cost'
+        WHEN c.crew_cost_clean IS NULL THEN 'Crew cost'
+        WHEN c.marketing_cost_clean IS NULL THEN 'Marketing cost'
+        WHEN c.venue_rental_clean IS NULL THEN 'Venue rental'
+        ELSE 'none'
+	END AS missing_data
+FROM 
+	performances_clean p 
+    JOIN costs_clean c ON p.performance_id = c.performance_id;
+    
+SELECT * FROM aggregations;
+
+CREATE OR REPLACE VIEW agg_by_month AS
+SELECT
+	MONTH(performance_date_clean) AS performance_month,
+    SUM(revenue) AS monthly_revenue,
+    SUM(total_cost) AS monthly_cost,
+    SUM(profit) AS monthly_profit
+FROM 
+	aggregations
+GROUP BY
+	MONTH(performance_date_clean);
+
+CREATE OR REPLACE VIEW agg_by_venue AS 
+SELECT
+	venue_id,
+    SUM(revenue) AS venue_revenue,
+    SUM(total_cost) AS venue_cost,
+    SUM(profit) AS venue_profit
+FROM 
+	aggregations
+GROUP BY
+	venue_id
+ORDER BY 
+	venue_profit DESC;
+
+CREATE OR REPLACE VIEW agg_by_tour AS
+SELECT
+	s.show_id,
+    s.show_name,
+    s.tour_start_date,
+    s.tour_end_date,
+    SUM(a.revenue) AS tour_revenue,
+    SUM(a.total_cost) AS tour_cost,
+    SUM(a.profit) AS tour_profit
+FROM
+	shows s
+JOIN aggregations a ON s.show_id = a.show_id
+GROUP BY 
+	s.show_id,
+    s.show_name,
+    s.tour_start_date,
+    s.tour_end_date
+ORDER BY 
+	tour_profit DESC;
+
+SELECT
+	*,
+    RANK() OVER (PARTITION BY show_id ORDER BY profit DESC) AS rank_show_profit
+FROM
+	aggregations;
+    
+SELECT 
+	*
+FROM 
+	performances p
+JOIN
+	venues v ON v.venue_id = p.venue_id
+WHERE p.tickets_sold > v.capacity;
