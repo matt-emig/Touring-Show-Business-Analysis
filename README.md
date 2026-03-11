@@ -26,4 +26,3 @@ This project answers questions such as:
 ## Limitations
 - Operational costs, i.e. performers' and staff salaries throughout the performance season, are missing. This would give a more complete understanding of the true cost of each tour, and a more accurate profit value.
 - Certain ticket sales information was missing and had to be zeroed out for calculations, leading to under-representation of revenue for certain productions and venues.
-- 
